@@ -190,44 +190,51 @@
     .lightbox-prev { left: 10px; }
     .lightbox-next { right: 10px; }
 
-    /* FAQ */
-    details {
-      background: var(--light);
+    /* FAQ PREMIUM */
+    .faq-item {
+      background: #ffffff;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
       padding: 1.2rem 1.5rem;
-      border-radius: 1rem;
-      margin-bottom: 1rem;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    }
-
-    summary {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    /* PRICING */
-    .pricing-box {
-      background: var(--light);
-      padding: 2.5rem;
-      border-radius: 1.5rem;
-      text-align: center;
-      box-shadow: 0 4px 25px rgba(0,0,0,0.08);
-      max-width: 600px;
-      margin: 0 auto;
+    .faq-icon {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
     }
 
-    .price {
-      font-size: 2.4rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      font-weight: 700;
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1.5rem;
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.6;
+      transition: max-height 0.35s ease;
     }
 
-    /* CONTACT */
-    .contact-box {
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 1.2rem;
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding-bottom: 1.2rem;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
     }
 
     footer {
@@ -244,6 +251,8 @@
 <body>
 
 <header>
+<img src="villa/logo.png" alt="Logo Villa Estela" 
+     style="width: 240px; margin-bottom: 1.5rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">
   <h1>Villa Estela</h1>
   <p>Une villa tropicale moderne avec piscine privée, à quelques minutes des plages de Cabarete.</p>
   <a href="#tarifs" class="btn btn-primary">Voir les tarifs</a>
@@ -311,47 +320,8 @@
   <span class="lightbox-nav lightbox-next" id="lightbox-next">&#10095;</span>
 </div>
 
-<section id="faq">
-  <h2>FAQ</h2>
-
-  <details>
-    <summary>Où est située la villa ?</summary>
-    <p>À Cabarete, à quelques minutes de la plage et du centre.</p>
-  </details>
-
-  <details>
-    <summary>Combien de personnes peuvent séjourner ?</summary>
-    <p>Jusqu’à 8 personnes confortablement.</p>
-  </details>
-
-  <details>
-    <summary>La villa a-t-elle une piscine privée ?</summary>
-    <p>Oui, entièrement privée et entourée de palmiers.</p>
-  </details>
-
-  <details>
-    <summary>Comment réserver ?</summary>
-    <p>Contactez-nous directement par courriel.</p>
-  </details>
-</section>
-
-<section id="calendrier">
-  <h2>Disponibilités</h2>
-  <p class="intro">Consultez les dates disponibles pour Villa Estela. Le calendrier est mis à jour automatiquement.</p>
-
-  <div style="display:flex; justify-content:center;">
-    <iframe 
-      src="https://calendar.google.com/calendar/embed?src=villa.estela.cabarete%40gmail.com&ctz=America%2FToronto"
-      style="border:0; width:100%; max-width:900px; height:600px; border-radius:12px;"
-      frameborder="0"
-      scrolling="no">
-    </iframe>
-  </div>
-</section>
-
 <section id="tarifs">
   <h2>Tarifs</h2>
-
   <div class="pricing-box">
     <div class="price">Tarifs sur demande</div>
     <p>Les prix varient selon la saison, la durée du séjour et le nombre de personnes.</p>
@@ -367,78 +337,118 @@
   </div>
 </section>
 
+<!-- FAQ PREMIUM -->
+<section id="faq">
+  <h2>FAQ – Questions fréquentes</h2>
+  <p class="intro">Tout ce que vous devez savoir avant de réserver votre séjour à Villa Estela.</p>
+
+  <div class="faq-container" style="max-width: 800px; margin: 0 auto;">
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Où est située Villa Estela?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Villa Estela est située à Kite Beach, Cabarete, à moins de 5 minutes à pied de la plage et à environ 20 minutes de l'aéroport de Puerto Plata (POP).
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Combien de personnes peuvent séjourner à Villa Estela?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        La villa compte 3 chambres avec chacune un lit king. Il y a aussi un sofa lit dans le salon. L’occupation maximale est de 8 personnes avec un maximum de 6 adultes.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        La piscine est-elle privée ou partagée?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Elle est privée!
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Quels sont les tarifs?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Prix à la semaine en dollars canadiens. Rabais pour les séjours de longue durée (contactez-nous).<br><br>
+        <strong>1er avril au 31 août :</strong> 1200$<br>
+        <strong>1er septembre au 30 novembre :</strong> 900$<br>
+        <strong>1er décembre au 17 décembre :</strong> 1500$<br>
+        <strong>18 décembre au 3 janvier :</strong> 2100$<br>
+        <strong>4 janvier au 31 mars :</strong> 1500$
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Comment réserver?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Contactez-nous par courriel : <strong>villa.estela.cabarete@gmail.com</strong><br>
+        ou via Facebook (voir le lien plus bas).
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <footer>
   © <span id="year"></span> Villa Estela – Cabarete, République dominicaine.
+
+  <br><br>
+
+  <!-- Icône Facebook ronde -->
+  <a href="https://www.facebook.com/EstelaCabarete" 
+     target="_blank" 
+     style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
+
+    <div style="
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #1877f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    ">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+           width="22" height="22" viewBox="0 0 24 24" fill="#ffffff">
+        <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 
+        23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.414c0-3.1 
+        1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 
+        0-1.796.715-1.796 1.763v2.316h3.587l-.467 3.696h-3.12V24h6.116C23.403 
+        24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
+      </svg>
+    </div>
+
+    <span style="color: #ffffff; font-weight: 600; font-size: 1rem;">
+      Suivez-nous sur Facebook
+    </span>
+
+  </a>
 </footer>
 
-<!-- LIGHTBOX SCRIPT -->
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  const galleryImages = document.querySelectorAll('.gallery img');
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const closeBtn = document.getElementById('lightbox-close');
-  const nextBtn = document.getElementById('lightbox-next');
-  const prevBtn = document.getElementById('lightbox-prev');
-
-  let currentIndex = 0;
-
-  function showLightbox(index) {
-    currentIndex = index;
-    lightboxImg.src = galleryImages[index].src;
-    lightbox.style.display = 'flex';
-  }
-
-  galleryImages.forEach((img, index) => {
-    img.addEventListener('click', () => showLightbox(index));
-  });
-
-  closeBtn.addEventListener('click', () => {
-    lightbox.style.display = 'none';
-  });
-
-  nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % galleryImages.length;
-    lightboxImg.src = galleryImages[currentIndex].src;
-  });
-
-  prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-    lightboxImg.src = galleryImages[currentIndex].src;
-  });
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) lightbox.style.display = 'none';
-  });
-</script>
-
-<!-- FACEBOOK MESSENGER -->
-<div id="fb-root"></div>
-
-<div id="fb-customer-chat" class="fb-customerchat"></div>
-
-<script>
-  var chatbox = document.getElementById('fb-customer-chat');
-  chatbox.setAttribute("page_id", "61560573538290");
-  chatbox.setAttribute("attribution", "biz_inbox");
-</script>
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      xfbml            : true,
-      version          : 'v18.0'
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.parentElement;
+      item.classList.toggle('active');
     });
-  };
-
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/fr_FR/sdk/xfbml.customerchat.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+  });
 </script>
 
 </body>
