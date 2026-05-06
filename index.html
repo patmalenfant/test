@@ -10,9 +10,9 @@
 
   <style>
     :root {
-      --primary: #0ea5a3;     /* turquoise moderne */
-      --sand: #f4efe7;        /* beige sable */
-      --dark: #1f2937;        /* gris foncé */
+      --primary: #0ea5a3;
+      --sand: #f4efe7;
+      --dark: #1f2937;
       --light: #ffffff;
       --accent: #ffb703;
       --max-width: 1200px;
@@ -138,12 +138,57 @@
       margin-bottom: 1rem;
       border-radius: 1rem;
       break-inside: avoid;
+      cursor: pointer;
       transition: 0.3s ease;
     }
 
     .gallery img:hover {
       transform: scale(1.02);
     }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 1rem;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 3rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 4rem;
+      color: white;
+      cursor: pointer;
+      padding: 0 20px;
+      user-select: none;
+    }
+
+    .lightbox-prev { left: 10px; }
+    .lightbox-next { right: 10px; }
 
     /* FAQ */
     details {
@@ -209,7 +254,15 @@
   <h2>Vivre le style Cabarete</h2>
   <p class="intro">
     Villa Estela combine design moderne, ambiance tropicale et confort absolu.  
-    Parfaite pour les familles, les kitesurfeurs et les voyageurs à la recherche d’un séjour haut de gamme.
+    Parfaite pour les familles, les kitesurfeurs, les travailleurs nomades et les voyageurs à la recherche d’un séjour haut de gamme.
+  </p>
+
+  <p class="intro" style="margin-top:2rem;">
+    Le nom “Villa Estela” s’inspire du mot “sillage”.  
+    Le sillage des kites qui filent sur l’eau turquoise de Cabarete, un endroit que nous aimons profondément.  
+    Et le sillage des patins sur la glace, symbole de nos racines québécoises.  
+    Villa Estela, c’est la rencontre de ces deux mondes : le vent chaud des tropiques et le froid du Nord.  
+    Un lieu où l’on vient créer des moments qui, comme un sillage, restent longtemps après le passage.
   </p>
 </section>
 
@@ -218,28 +271,45 @@
   <p class="intro">Tout ce qu’il faut pour un séjour parfait.</p>
 
   <div class="features">
-    <div class="feature">🛏️ 4 chambres climatisées</div>
-    <div class="feature">🛁 3 salles de bain</div>
+    <div class="feature">🛏️ 3 chambres climatisées</div>
+    <div class="feature">🛁 2.5 salles de bain</div>
     <div class="feature">🏊 Piscine privée</div>
+    <div class="feature">🍳 Cuisine complète + mini‑cuisine extérieure</div>
+    <div class="feature">🔥 BBQ extérieur</div>
+    <div class="feature">🧺 Laveuse</div>
     <div class="feature">⚡ Wi-Fi haute vitesse</div>
-    <div class="feature">🍳 Cuisine complète</div>
     <div class="feature">🌴 Quartier calme et sécurisé</div>
   </div>
 </section>
 
 <section id="galerie">
   <h2>Galerie</h2>
-  <p class="intro">Aperçu visuel – remplace ces images par les tiennes.</p>
+  <p class="intro">Aperçu visuel – photos officielles de Villa Estela.</p>
 
   <div class="gallery">
-    <img src="https://picsum.photos/600/800?random=21">
-    <img src="https://picsum.photos/600/500?random=22">
-    <img src="https://picsum.photos/600/900?random=23">
-    <img src="https://picsum.photos/600/700?random=24">
-    <img src="https://picsum.photos/600/600?random=25">
-    <img src="https://picsum.photos/600/850?random=26">
+    <img src="villa/1.jpg">
+    <img src="villa/2.jpg">
+    <img src="villa/3.jpg">
+    <img src="villa/4.jpg">
+    <img src="villa/5.jpg">
+    <img src="villa/6.jpg">
+    <img src="villa/7.jpg">
+    <img src="villa/8.jpg">
+    <img src="villa/9.jpg">
+    <img src="villa/10.jpg">
+    <img src="villa/11.jpg">
+    <img src="villa/12.jpg">
+    <img src="villa/13.jpg">
   </div>
 </section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lightbox-close">&times;</span>
+  <span class="lightbox-nav lightbox-prev" id="lightbox-prev">&#10094;</span>
+  <img id="lightbox-img">
+  <span class="lightbox-nav lightbox-next" id="lightbox-next">&#10095;</span>
+</div>
 
 <section id="faq">
   <h2>FAQ</h2>
@@ -252,4 +322,124 @@
   <details>
     <summary>Combien de personnes peuvent séjourner ?</summary>
     <p>Jusqu’à 8 personnes confortablement.</p>
-  
+  </details>
+
+  <details>
+    <summary>La villa a-t-elle une piscine privée ?</summary>
+    <p>Oui, entièrement privée et entourée de palmiers.</p>
+  </details>
+
+  <details>
+    <summary>Comment réserver ?</summary>
+    <p>Contactez-nous directement par courriel.</p>
+  </details>
+</section>
+
+<section id="calendrier">
+  <h2>Disponibilités</h2>
+  <p class="intro">Consultez les dates disponibles pour Villa Estela. Le calendrier est mis à jour automatiquement.</p>
+
+  <div style="display:flex; justify-content:center;">
+    <iframe 
+      src="https://calendar.google.com/calendar/embed?src=villa.estela.cabarete%40gmail.com&ctz=America%2FToronto"
+      style="border:0; width:100%; max-width:900px; height:600px; border-radius:12px;"
+      frameborder="0"
+      scrolling="no">
+    </iframe>
+  </div>
+</section>
+
+<section id="tarifs">
+  <h2>Tarifs</h2>
+
+  <div class="pricing-box">
+    <div class="price">Tarifs sur demande</div>
+    <p>Les prix varient selon la saison, la durée du séjour et le nombre de personnes.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p class="intro">Indiquez vos dates et vos besoins, nous vous répondrons rapidement.</p>
+
+  <div class="contact-box">
+    <p>Email : <strong>villa.estela.cabarete@gmail.com</strong></p>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Villa Estela – Cabarete, République dominicaine.
+</footer>
+
+<!-- LIGHTBOX SCRIPT -->
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const galleryImages = document.querySelectorAll('.gallery img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = document.getElementById('lightbox-close');
+  const nextBtn = document.getElementById('lightbox-next');
+  const prevBtn = document.getElementById('lightbox-prev');
+
+  let currentIndex = 0;
+
+  function showLightbox(index) {
+    currentIndex = index;
+    lightboxImg.src = galleryImages[index].src;
+    lightbox.style.display = 'flex';
+  }
+
+  galleryImages.forEach((img, index) => {
+    img.addEventListener('click', () => showLightbox(index));
+  });
+
+  closeBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentIndex].src;
+  });
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentIndex].src;
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) lightbox.style.display = 'none';
+  });
+</script>
+
+<!-- FACEBOOK MESSENGER -->
+<div id="fb-root"></div>
+
+<div id="fb-customer-chat" class="fb-customerchat"></div>
+
+<script>
+  var chatbox = document.getElementById('fb-customer-chat');
+  chatbox.setAttribute("page_id", "61560573538290");
+  chatbox.setAttribute("attribution", "biz_inbox");
+</script>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml            : true,
+      version          : 'v18.0'
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/fr_FR/sdk/xfbml.customerchat.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+</body>
+</html>
