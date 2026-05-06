@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Villa Estela – Cabarete, République dominicaine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Typo moderne -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0ea5a3;     /* turquoise moderne */
+      --sand: #f4efe7;        /* beige sable */
+      --dark: #1f2937;        /* gris foncé */
+      --light: #ffffff;
+      --accent: #ffb703;
+      --max-width: 1200px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--sand);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    /* HERO */
+    header {
+      height: 90vh;
+      background: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)),
+                  url('https://picsum.photos/2000/1200?random=10') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: var(--light);
+      padding: 2rem;
+    }
+
+    header h1 {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      max-width: 650px;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.25s ease;
+      margin: 0.4rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--light);
+    }
+
+    .btn-primary:hover {
+      background: #0c8c8a;
+    }
+
+    .btn-light {
+      background: rgba(255,255,255,0.2);
+      color: var(--light);
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .btn-light:hover {
+      background: rgba(255,255,255,0.35);
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: var(--max-width);
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+    }
+
+    h2 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem auto;
+      color: #555;
+      font-size: 1.1rem;
+    }
+
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature {
+      background: var(--light);
+      padding: 1.8rem;
+      border-radius: 1rem;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: 0.25s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    /* GALLERY */
+    .gallery {
+      columns: 3;
+      column-gap: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      margin-bottom: 1rem;
+      border-radius: 1rem;
+      break-inside: avoid;
+      transition: 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.02);
+    }
+
+    /* FAQ */
+    details {
+      background: var(--light);
+      padding: 1.2rem 1.5rem;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    summary {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* PRICING */
+    .pricing-box {
+      background: var(--light);
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .price {
+      font-size: 2.4rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    /* CONTACT */
+    .contact-box {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--dark);
+      color: var(--light);
+      margin-top: 4rem;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Villa Estela</h1>
+  <p>Une villa tropicale moderne avec piscine privée, à quelques minutes des plages de Cabarete.</p>
+  <a href="#tarifs" class="btn btn-primary">Voir les tarifs</a>
+  <a href="#galerie" class="btn btn-light">Voir la galerie</a>
+</header>
+
+<section id="about">
+  <h2>Vivre le style Cabarete</h2>
+  <p class="intro">
+    Villa Estela combine design moderne, ambiance tropicale et confort absolu.  
+    Parfaite pour les familles, les kitesurfeurs et les voyageurs à la recherche d’un séjour haut de gamme.
+  </p>
+</section>
+
+<section id="caracteristiques">
+  <h2>Caractéristiques</h2>
+  <p class="intro">Tout ce qu’il faut pour un séjour parfait.</p>
+
+  <div class="features">
+    <div class="feature">🛏️ 4 chambres climatisées</div>
+    <div class="feature">🛁 3 salles de bain</div>
+    <div class="feature">🏊 Piscine privée</div>
+    <div class="feature">⚡ Wi-Fi haute vitesse</div>
+    <div class="feature">🍳 Cuisine complète</div>
+    <div class="feature">🌴 Quartier calme et sécurisé</div>
+  </div>
+</section>
+
+<section id="galerie">
+  <h2>Galerie</h2>
+  <p class="intro">Aperçu visuel – remplace ces images par les tiennes.</p>
+
+  <div class="gallery">
+    <img src="https://picsum.photos/600/800?random=21">
+    <img src="https://picsum.photos/600/500?random=22">
+    <img src="https://picsum.photos/600/900?random=23">
+    <img src="https://picsum.photos/600/700?random=24">
+    <img src="https://picsum.photos/600/600?random=25">
+    <img src="https://picsum.photos/600/850?random=26">
+  </div>
+</section>
+
+<section id="faq">
+  <h2>FAQ</h2>
+
+  <details>
+    <summary>Où est située la villa ?</summary>
+    <p>À Cabarete, à quelques minutes de la plage et du centre.</p>
+  </details>
+
+  <details>
+    <summary>Combien de personnes peuvent séjourner ?</summary>
+    <p>Jusqu’à 8 personnes confortablement.</p>
+  
