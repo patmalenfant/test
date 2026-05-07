@@ -26,16 +26,19 @@
       line-height: 1.7;
     }
 
-    /* HERO */
+    /* HERO simple et robuste */
     header {
       height: 90vh;
-      background: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)),
-                  url('https://picsum.photos/2000/1200?random=10') center/cover no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
+
       color: var(--light);
       padding: 2rem;
     }
@@ -61,15 +64,6 @@
       font-weight: 600;
       transition: 0.25s ease;
       margin: 0.4rem;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: var(--light);
-    }
-
-    .btn-primary:hover {
-      background: #0c8c8a;
     }
 
     .btn-light {
@@ -190,7 +184,7 @@
     .lightbox-prev { left: 10px; }
     .lightbox-next { right: 10px; }
 
-    /* FAQ PREMIUM */
+    /* FAQ */
     .faq-item {
       background: #ffffff;
       border-radius: 12px;
@@ -251,14 +245,45 @@
 <body>
 
 <header>
-  <img src="villa/logo.png" alt="Logo Villa Estela" 
+  <img src="villa/logo.png" alt="Logo Villa Estela"
        style="width: 240px; margin-bottom: 1.5rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">
 
   <h1>Villa Estela</h1>
   <p>Une villa tropicale moderne avec piscine privée, à quelques minutes des plages de Cabarete.</p>
-  <a href="#tarifs" class="btn btn-primary">Voir les tarifs</a>
   <a href="#galerie" class="btn btn-light">Voir la galerie</a>
 </header>
+
+<div style="text-align:center; margin-top:3rem; margin-bottom:2rem;">
+  <a href="https://www.facebook.com/EstelaCabarete"
+     target="_blank"
+     style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
+
+    <div style="
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #1877f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    ">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="20" height="20" viewBox="0 0 24 24" fill="#ffffff">
+        <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 
+        23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.414c0-3.1 
+        1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 
+        0-1.796.715-1.796 1.763v2.316h3.587l-.467 3.696h-3.12V24h6.116C23.403 
+        24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
+      </svg>
+    </div>
+
+    <span style="color:#1f2937; font-weight:600; font-size:1.1rem;">
+      Suivez-nous sur Facebook
+    </span>
+
+  </a>
+</div>
 
 <section id="about">
   <h2>Vivre le style Cabarete</h2>
@@ -269,7 +294,7 @@
 
   <p class="intro" style="margin-top:2rem;">
     Le nom “Villa Estela” s’inspire du mot “sillage”.  
-    Le sillage des kites qui filent sur l’eau turquoise de Cabarete, un endroit que nous aimons profondément.  
+    Le sillage des kitesurfs qui filent sur l’eau turquoise de Cabarete, un endroit que nous aimons profondément.  
     Et le sillage des patins sur la glace, symbole de nos racines québécoises.  
     Villa Estela, c’est la rencontre de ces deux mondes : le vent chaud des tropiques et le froid du Nord.  
     Un lieu où l’on vient créer des moments qui, comme un sillage, restent longtemps après le passage.
@@ -294,7 +319,7 @@
 
 <section id="galerie">
   <h2>Galerie</h2>
-  <p class="intro">Aperçu visuel – photos officielles de Villa Estela.</p>
+  <p class="intro">Photos officielles de Villa Estela.</p>
 
   <div class="gallery">
     <img src="villa/1.jpg">
@@ -321,28 +346,24 @@
   <span class="lightbox-nav lightbox-next" id="lightbox-next">&#10095;</span>
 </div>
 
-<section id="tarifs">
-  <h2>Tarifs</h2>
-  <div class="pricing-box">
-    <div class="price">Tarifs sur demande</div>
-    <p>Les prix varient selon la saison, la durée du séjour et le nombre de personnes.</p>
-  </div>
-</section>
-
 <section id="contact">
   <h2>Contact</h2>
   <p class="intro">Indiquez vos dates et vos besoins, nous vous répondrons rapidement.</p>
 
-  <div class="contact-box">
-    <p>Email : <strong>villa.estela.cabarete@gmail.com</strong></p>
+  <div class="contact-box" style="text-align:center;">
+    <p>
+      Email :
+      <a href="mailto:villa.estela.cabarete@gmail.com"
+         style="font-weight:600; color:#1f2937; text-decoration:none;">
+        villa.estela.cabarete@gmail.com
+      </a>
+    </p>
   </div>
 </section>
 
-
-
 <section id="calendrier">
   <h2>Disponibilités</h2>
-  <p class="intro">Consultez les dates disponibles pour Villa Estela. Le calendrier est mis à jour automatiquement.</p>
+  <p class="intro">Consultez les dates disponibles pour Villa Estela. ATTENTION: Il arrive que les dates non disponibles ne s'affichent pas avec Safari et Firefox</p>
 
   <div style="display:flex; justify-content:center;">
     <iframe 
@@ -354,7 +375,7 @@
   </div>
 </section>
 
-<!-- FAQ PREMIUM -->
+<!-- FAQ -->
 <section id="faq">
   <h2>FAQ – Questions fréquentes</h2>
   <p class="intro">Tout ce que vous devez savoir avant de réserver votre séjour à Villa Estela.</p>
@@ -425,9 +446,8 @@
 
   <br><br>
 
-  <!-- Icône Facebook ronde -->
-  <a href="https://www.facebook.com/EstelaCabarete" 
-     target="_blank" 
+  <a href="https://www.facebook.com/EstelaCabarete"
+     target="_blank"
      style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
 
     <div style="
@@ -439,34 +459,9 @@
       justify-content: center;
       align-items: center;
     ">
-      <svg xmlns="http://www.w3.org/2000/svg" 
+      <svg xmlns="http://www.w3.org/2000/svg"
            width="22" height="22" viewBox="0 0 24 24" fill="#ffffff">
         <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 
         23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.414c0-3.1 
         1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 
-        0-1.796.715-1.796 1.763v2.316h3.587l-.467 3.696h-3.12V24h6.116C23.403 
-        24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
-      </svg>
-    </div>
-
-    <span style="color: #ffffff; font-weight: 600; font-size: 1rem;">
-      Suivez-nous sur Facebook
-    </span>
-
-  </a>
-</footer>
-
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // FAQ accordion
-  document.querySelectorAll('.faq-question').forEach(button => {
-    button.addEventListener('click', () => {
-      const item = button.parentElement;
-      item.classList.toggle('active');
-    });
-  });
-</script>
-
-</body>
-</html>
+        0-1.796.
