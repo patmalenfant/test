@@ -2,171 +2,550 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Villa Estela – Cabarete, République dominicaine</title>
+  <title>Villa Estela Cabarete – Villa moderne avec piscine privée</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Typo moderne -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Villa Estela à Cabarete : villa moderne avec piscine privée, 3 chambres, cuisine complète, Wi-Fi haute vitesse. À 5 minutes de la plage de Kite Beach.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --primary: #0ea5a3;
+      --primary-soft: #b9ece7;
       --sand: #f4efe7;
-      --dark: #1f2937;
+      --dark: #111827;
+      --muted: #6b7280;
       --light: #ffffff;
-      --accent: #ffb703;
-      --max-width: 1200px;
+      --accent: #f59e0b;
+      --max-width: 1120px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.18);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: 'Inter', sans-serif;
       background: var(--sand);
       color: var(--dark);
       line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* HERO simple et robuste */
-    header {
-      height: 90vh;
+    a { color: inherit; text-decoration: none; }
+
+    img { max-width: 100%; display: block; }
+
+    /* NAVBAR */
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+    }
+
+    .navbar-inner {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .navbar-logo img {
+      height: 40px;
+    }
+
+    .navbar-logo span {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: #f9fafb;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .navbar-links a {
+      color: #e5e7eb;
+      position: relative;
+      padding-bottom: 0.2rem;
+    }
+
+    .navbar-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-soft);
+      transition: width 0.25s ease;
+    }
+
+    .navbar-links a:hover::after {
+      width: 100%;
+    }
+
+    .navbar-cta {
+      padding: 0.55rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 250, 252, 0.7);
+      color: #f9fafb;
+      font-size: 0.9rem;
+      font-weight: 500;
+      background: rgba(15, 23, 42, 0.25);
+      backdrop-filter: blur(10px);
+      transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+    }
+
+    .navbar-cta:hover {
+      background: rgba(15, 23, 42, 0.6);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35);
+    }
+
+    .navbar.scrolled {
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.45);
+    }
+
+    .navbar.scrolled .navbar-logo span {
+      color: #e5e7eb;
+    }
+
+    /* HERO SLIDER */
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      color: var(--light);
+      overflow: hidden;
+    }
+
+    .hero-slider {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
 
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    .hero-slide.active {
+      opacity: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.85));
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      height: 100%;
+      padding: 7rem 1.5rem 3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 3rem;
       align-items: center;
-      text-align: center;
-
-      color: var(--light);
-      padding: 2rem;
     }
 
-    header h1 {
-      font-size: clamp(3rem, 6vw, 4.5rem);
-      font-weight: 700;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.25);
+    }
+
+    .hero-title {
+      font-size: clamp(2.7rem, 4vw, 3.4rem);
+      line-height: 1.1;
       margin-bottom: 1rem;
+      font-weight: 700;
     }
 
-    header p {
-      font-size: 1.3rem;
-      max-width: 650px;
-      opacity: 0.9;
+    .hero-title span {
+      color: var(--primary-soft);
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      max-width: 520px;
+      color: #e5e7eb;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      font-size: 0.9rem;
+      color: #e5e7eb;
       margin-bottom: 2rem;
     }
 
-    .btn {
-      display: inline-block;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
+    .hero-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .hero-meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      padding: 0.9rem 1.6rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--primary);
+      color: #0b1120;
       font-weight: 600;
-      transition: 0.25s ease;
-      margin: 0.4rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 18px 40px rgba(8, 47, 57, 0.55);
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
 
-    .btn-light {
-      background: rgba(255,255,255,0.2);
-      color: var(--light);
-      border: 1px solid rgba(255,255,255,0.4);
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 55px rgba(8, 47, 57, 0.7);
+      background: #14b8a6;
     }
 
-    .btn-light:hover {
-      background: rgba(255,255,255,0.35);
+    .btn-secondary {
+      padding: 0.85rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.4);
+      color: #e5e7eb;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
-    /* SECTIONS */
-    section {
-      max-width: var(--max-width);
-      margin: 4rem auto;
-      padding: 0 1.5rem;
+    .btn-secondary:hover {
+      background: rgba(15, 23, 42, 0.8);
+      border-color: rgba(209, 213, 219, 0.9);
     }
 
-    h2 {
-      font-size: 2.4rem;
-      font-weight: 700;
+    .hero-right {
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .hero-card {
+      background: rgba(15, 23, 42, 0.92);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem 1.5rem;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-bottom: 1rem;
-      text-align: center;
     }
 
-    .intro {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 3rem auto;
-      color: #555;
-      font-size: 1.1rem;
+    .hero-card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .hero-card-pill {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.12);
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    .hero-card-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #cbd5f5;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-card-price {
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed rgba(148, 163, 184, 0.6);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .hero-card-price strong {
+      font-size: 1.2rem;
+    }
+
+    .hero-card-note {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 0.6rem;
+    }
+
+    /* SECTIONS GLOBALES */
+
+    main {
+      background: linear-gradient(to bottom, #f9fafb, var(--sand));
+    }
+
+    .section {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem 0;
+    }
+
+    .section-header {
+      text-align: left;
+      margin-bottom: 2.2rem;
+    }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    /* SECTION ABOUT */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      margin-bottom: 1rem;
+      font-size: 0.98rem;
+      color: #374151;
+    }
+
+    .about-highlight {
+      margin-top: 1.2rem;
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius-md);
+      background: #ecfdf5;
+      border: 1px solid #bbf7d0;
+      font-size: 0.9rem;
+      color: #166534;
+    }
+
+    .about-card {
+      background: var(--light);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem 1.5rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      border: 1px solid #e5e7eb;
+    }
+
+    .about-card-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+      color: #4b5563;
+    }
+
+    .about-card-row strong {
+      font-weight: 600;
     }
 
     /* FEATURES */
-    .features {
+
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.2rem;
     }
 
-    .feature {
+    .feature-card {
       background: var(--light);
-      padding: 1.8rem;
-      border-radius: 1rem;
-      text-align: center;
-      font-size: 1.1rem;
-      font-weight: 600;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-      transition: 0.25s ease;
+      border-radius: var(--radius-md);
+      padding: 1.2rem 1.1rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      font-size: 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
     }
 
-    .feature:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    .feature-label {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .feature-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: #ecfeff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .feature-note {
+      font-size: 0.85rem;
+      color: var(--muted);
     }
 
     /* GALLERY */
-    .gallery {
+
+    .gallery-wrapper {
+      margin-top: 1rem;
+    }
+
+    .gallery-grid {
       columns: 3;
       column-gap: 1rem;
     }
 
-    .gallery img {
+    .gallery-grid img {
       width: 100%;
       margin-bottom: 1rem;
-      border-radius: 1rem;
+      border-radius: 16px;
       break-inside: avoid;
       cursor: pointer;
-      transition: 0.3s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.18);
     }
 
-    .gallery img:hover {
-      transform: scale(1.02);
+    .gallery-grid img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.28);
+      filter: brightness(1.03);
     }
 
     /* LIGHTBOX */
+
     .lightbox {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.85);
+      inset: 0;
+      background: rgba(15, 23, 42, 0.92);
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 9999;
+      z-index: 60;
     }
 
-    .lightbox img {
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-img {
       max-width: 90%;
       max-height: 90%;
-      border-radius: 1rem;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      border-radius: 18px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
     }
 
     .lightbox-close {
       position: absolute;
-      top: 20px;
+      top: 24px;
       right: 30px;
-      font-size: 3rem;
-      color: white;
+      font-size: 2.4rem;
+      color: #f9fafb;
       cursor: pointer;
     }
 
@@ -174,294 +553,744 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 4rem;
-      color: white;
+      font-size: 3rem;
+      color: #f9fafb;
       cursor: pointer;
-      padding: 0 20px;
+      padding: 0 18px;
       user-select: none;
     }
 
     .lightbox-prev { left: 10px; }
     .lightbox-next { right: 10px; }
 
-    /* FAQ */
-    .faq-item {
-      background: #ffffff;
-      border-radius: 12px;
-      margin-bottom: 1rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    /* CALENDRIER & CONTACT */
+
+    .calendar-frame {
+      border: none;
+      width: 100%;
+      max-width: 900px;
+      height: 600px;
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
       overflow: hidden;
+    }
+
+    .contact-card {
+      background: var(--light);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem 1.5rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      max-width: 520px;
+    }
+
+    .contact-card p {
+      font-size: 0.95rem;
+      color: #374151;
+      margin-bottom: 0.6rem;
+    }
+
+    .contact-email {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    /* FAQ */
+
+    .faq-list {
+      max-width: 720px;
+    }
+
+    .faq-item {
+      background: var(--light);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.8rem;
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
     }
 
     .faq-question {
       width: 100%;
       background: none;
       border: none;
-      padding: 1.2rem 1.5rem;
-      font-size: 1.15rem;
+      padding: 1rem 1.1rem;
+      font-size: 0.98rem;
       font-weight: 600;
       text-align: left;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      color: #111827;
     }
 
     .faq-icon {
-      font-size: 1.5rem;
-      transition: transform 0.3s ease;
+      font-size: 1.4rem;
+      transition: transform 0.25s ease;
+      color: var(--muted);
     }
 
     .faq-answer {
       max-height: 0;
       overflow: hidden;
-      padding: 0 1.5rem;
-      font-size: 1rem;
-      color: #444;
+      padding: 0 1.1rem;
+      font-size: 0.9rem;
+      color: #4b5563;
       line-height: 1.6;
-      transition: max-height 0.35s ease;
+      transition: max-height 0.3s ease;
     }
 
     .faq-item.active .faq-answer {
-      max-height: 500px;
-      padding-bottom: 1.2rem;
+      max-height: 400px;
+      padding-bottom: 1rem;
     }
 
     .faq-item.active .faq-icon {
       transform: rotate(45deg);
     }
 
+    /* FOOTER */
+
     footer {
-      text-align: center;
-      padding: 2rem;
-      background: var(--dark);
-      color: var(--light);
       margin-top: 4rem;
-      font-size: 0.95rem;
+      padding: 2.5rem 1.5rem 2rem;
+      background: #020617;
+      color: #9ca3af;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .footer-left {
+      font-size: 0.85rem;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .footer-fb-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: #1877f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(24, 119, 242, 0.6);
+    }
+
+    .footer-right span {
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 6rem;
+      }
+      .hero-right {
+        justify-content: flex-start;
+      }
+      .hero-card {
+        max-width: 100%;
+      }
+      .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar-inner {
+        padding-inline: 1rem;
+      }
+      .navbar-links {
+        display: none;
+      }
+      .hero {
+        height: 90vh;
+        min-height: 540px;
+      }
+      .hero-inner {
+        padding-inline: 1.2rem;
+      }
+      .gallery-grid {
+        columns: 2;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .gallery-grid {
+        columns: 1;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <img src="villa/logo.png" alt="Logo Villa Estela"
-       style="width: 240px; margin-bottom: 1.5rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-logo">
+      <img src="villa/logo.png" alt="Villa Estela">
+      <span>VILLA ESTELA</span>
+    </div>
+    <div class="navbar-links">
+      <a href="#about">La villa</a>
+      <a href="#features">Caractéristiques</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#calendrier">Disponibilités</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#calendrier" class="navbar-cta">Voir les dates</a>
+  </div>
+</nav>
 
-  <h1>Villa Estela</h1>
-  <p>Une villa tropicale moderne avec piscine privée, à quelques minutes des plages de Cabarete.</p>
-  <a href="#galerie" class="btn btn-light">Voir la galerie</a>
+<!-- HERO AVEC SLIDER -->
+<header class="hero">
+  <div class="hero-slider" id="hero-slider">
+    <div class="hero-slide active" style="background-image:url('villa/1.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('villa/2.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('villa/3.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('villa/4.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('villa/5.jpg')"></div>
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Villa moderne à Kite Beach, Cabarete
+      </div>
+
+      <h1 class="hero-title">
+        Votre villa tropicale moderne<br>
+        <span>avec piscine privée</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Villa Estela est une villa lumineuse et contemporaine, à quelques minutes de la plage de Kite Beach.
+        Parfaite pour les familles, les kitesurfeurs et les voyageurs qui veulent un séjour haut de gamme, sans compromis.
+      </p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-dot"></span>
+          3 chambres king · 2.5 salles de bain
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-dot"></span>
+          Piscine privée · Cuisine complète
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-dot"></span>
+          Wi‑Fi haute vitesse · Quartier calme
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#calendrier" class="btn-primary">
+          Vérifier les disponibilités
+          <span>→</span>
+        </a>
+        <a href="#galerie" class="btn-secondary">
+          Voir la galerie
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="hero-card-title">Séjour type (7 nuits)</div>
+          <div class="hero-card-pill">Réservation directe</div>
+        </div>
+
+        <div class="hero-card-row">
+          <span>Saison régulière (avril–août)</span>
+          <strong>1200&nbsp;$ CAD</strong>
+        </div>
+        <div class="hero-card-row">
+          <span>Basse saison (sept.–nov.)</span>
+          <strong>900&nbsp;$ CAD</strong>
+        </div>
+        <div class="hero-card-row">
+          <span>Haute saison (déc.–mars)</span>
+          <strong>1500&nbsp;$ CAD</strong>
+        </div>
+        <div class="hero-card-row">
+          <span>Période des Fêtes</span>
+          <strong>2100&nbsp;$ CAD</strong>
+        </div>
+
+        <div class="hero-card-price">
+          <span>À partir de</span>
+          <strong>~129&nbsp;$ / nuit</strong>
+        </div>
+        <p class="hero-card-note">
+          Rabais pour les séjours de longue durée. Contactez‑nous pour un devis personnalisé.
+        </p>
+      </div>
+    </div>
+  </div>
 </header>
 
-<div style="text-align:center; margin-top:3rem; margin-bottom:2rem;">
-  <a href="https://www.facebook.com/EstelaCabarete"
-     target="_blank"
-     style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
+<main>
 
-    <div style="
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: #1877f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    ">
-      <svg xmlns="http://www.w3.org/2000/svg"
-           width="20" height="20" viewBox="0 0 24 24" fill="#ffffff">
-        <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 
-        23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.414c0-3.1 
-        1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 
-        0-1.796.715-1.796 1.763v2.316h3.587l-.467 3.696h-3.12V24h6.116C23.403 
-        24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
-      </svg>
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-header">
+      <div class="section-kicker">La villa</div>
+      <h2 class="section-title">Vivre le style Cabarete, version Estela</h2>
+      <p class="section-subtitle">
+        Une villa pensée pour ceux qui aiment le vent, la lumière, l’eau… et le confort moderne.
+      </p>
     </div>
 
-    <span style="color:#1f2937; font-weight:600; font-size:1.1rem;">
-      Suivez-nous sur Facebook
-    </span>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Villa Estela combine design moderne, ambiance tropicale et confort absolu.
+          Les grandes fenêtres, la terrasse et la piscine privée créent un espace de vie fluide entre l’intérieur et l’extérieur.
+        </p>
+        <p>
+          Située à Kite Beach, Cabarete, la villa est idéale pour les familles, les kitesurfeurs,
+          les télétravailleurs et les voyageurs qui recherchent un séjour haut de gamme dans un quartier calme et sécuritaire.
+        </p>
+        <p>
+          Le nom “Villa Estela” s’inspire du mot “sillage”.
+          Le sillage des kitesurfs qui filent sur l’eau turquoise de Cabarete, un endroit que nous aimons profondément.
+          Et le sillage des patins sur la glace, symbole de nos racines québécoises.
+        </p>
+        <p>
+          Villa Estela, c’est la rencontre de ces deux mondes : le vent chaud des tropiques et le froid du Nord.
+          Un lieu où l’on vient créer des moments qui, comme un sillage, restent longtemps après le passage.
+        </p>
 
-  </a>
-</div>
+        <div class="about-highlight">
+          Séjour minimum de 7 nuits.  
+          Occupation maximale : 8 personnes (dont un maximum de 6 adultes).
+        </div>
+      </div>
 
-<section id="about">
-  <h2>Vivre le style Cabarete</h2>
-  <p class="intro">
-    Villa Estela combine design moderne, ambiance tropicale et confort absolu.  
-    Parfaite pour les familles, les kitesurfeurs, les travailleurs nomades et les voyageurs à la recherche d’un séjour haut de gamme.
-  </p>
-
-  <p class="intro" style="margin-top:2rem;">
-    Le nom “Villa Estela” s’inspire du mot “sillage”.  
-    Le sillage des kitesurfs qui filent sur l’eau turquoise de Cabarete, un endroit que nous aimons profondément.  
-    Et le sillage des patins sur la glace, symbole de nos racines québécoises.  
-    Villa Estela, c’est la rencontre de ces deux mondes : le vent chaud des tropiques et le froid du Nord.  
-    Un lieu où l’on vient créer des moments qui, comme un sillage, restent longtemps après le passage.
-  </p>
-</section>
-
-<section id="caracteristiques">
-  <h2>Caractéristiques</h2>
-  <p class="intro">Tout ce qu’il faut pour un séjour parfait.</p>
-
-  <div class="features">
-    <div class="feature">🛏️ 3 chambres climatisées</div>
-    <div class="feature">🛁 2.5 salles de bain</div>
-    <div class="feature">🏊 Piscine privée</div>
-    <div class="feature">🍳 Cuisine complète + mini‑cuisine extérieure</div>
-    <div class="feature">🔥 BBQ extérieur</div>
-    <div class="feature">🧺 Laveuse</div>
-    <div class="feature">⚡ Wi-Fi haute vitesse</div>
-    <div class="feature">🌴 Quartier calme et sécurisé</div>
-  </div>
-</section>
-
-<section id="galerie">
-  <h2>Galerie</h2>
-  <p class="intro">Photos officielles de Villa Estela.</p>
-
-  <div class="gallery">
-    <img src="villa/1.jpg">
-    <img src="villa/2.jpg">
-    <img src="villa/3.jpg">
-    <img src="villa/4.jpg">
-    <img src="villa/5.jpg">
-    <img src="villa/6.jpg">
-    <img src="villa/7.jpg">
-    <img src="villa/8.jpg">
-    <img src="villa/9.jpg">
-    <img src="villa/10.jpg">
-    <img src="villa/11.jpg">
-    <img src="villa/12.jpg">
-    <img src="villa/13.jpg">
-  </div>
-</section>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <span class="lightbox-close" id="lightbox-close">&times;</span>
-  <span class="lightbox-nav lightbox-prev" id="lightbox-prev">&#10094;</span>
-  <img id="lightbox-img">
-  <span class="lightbox-nav lightbox-next" id="lightbox-next">&#10095;</span>
-</div>
-
-<section id="contact">
-  <h2>Contact</h2>
-  <p class="intro">Indiquez vos dates et vos besoins, nous vous répondrons rapidement.</p>
-
-  <div class="contact-box" style="text-align:center;">
-    <p>
-      Email :
-      <a href="mailto:villa.estela.cabarete@gmail.com"
-         style="font-weight:600; color:#1f2937; text-decoration:none;">
-        villa.estela.cabarete@gmail.com
-      </a>
-    </p>
-  </div>
-</section>
-
-<section id="calendrier">
-  <h2>Disponibilités</h2>
-  <p class="intro">Consultez les dates disponibles pour Villa Estela. ATTENTION: Il arrive que les dates non disponibles ne s'affichent pas avec Safari et Firefox</p>
-
-  <div style="display:flex; justify-content:center;">
-    <iframe 
-      src="https://calendar.google.com/calendar/embed?src=villa.estela.cabarete%40gmail.com&ctz=America%2FToronto"
-      style="border:0; width:100%; max-width:900px; height:600px; border-radius:12px;"
-      frameborder="0"
-      scrolling="no">
-    </iframe>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-  <h2>FAQ – Questions fréquentes</h2>
-  <p class="intro">Tout ce que vous devez savoir avant de réserver votre séjour à Villa Estela.</p>
-
-  <div class="faq-container" style="max-width: 800px; margin: 0 auto;">
-
-    <div class="faq-item">
-      <button class="faq-question">
-        Où est située Villa Estela?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        Villa Estela est située à Kite Beach, Cabarete, à moins de 5 minutes à pied de la plage et à environ 20 minutes de l'aéroport de Puerto Plata (POP).
+      <div class="about-card">
+        <div class="about-card-row">
+          <span>📍 Localisation</span>
+          <strong>Kite Beach, Cabarete</strong>
+        </div>
+        <div class="about-card-row">
+          <span>🚗 Aéroport le plus proche</span>
+          <strong>Puerto Plata (POP) ~20 min</strong>
+        </div>
+        <div class="about-card-row">
+          <span>🛏️ Chambres</span>
+          <strong>3 lits king</strong>
+        </div>
+        <div class="about-card-row">
+          <span>🛁 Salles de bain</span>
+          <strong>2.5</strong>
+        </div>
+        <div class="about-card-row">
+          <span>🏊 Piscine</span>
+          <strong>Privée</strong>
+        </div>
+        <div class="about-card-row">
+          <span>🌐 Internet</span>
+          <strong>Wi‑Fi haute vitesse</strong>
+        </div>
+        <div class="about-card-row">
+          <span>👨‍👩‍👧‍👦 Idéal pour</span>
+          <strong>Familles & kitesurfeurs</strong>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="faq-item">
-      <button class="faq-question">
-        Combien de personnes peuvent séjourner à Villa Estela?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        La villa compte 3 chambres avec chacune un lit king. Il y a aussi un sofa lit dans le salon. L’occupation maximale est de 8 personnes avec un maximum de 6 adultes.
-      </div>
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="section-header">
+      <div class="section-kicker">Caractéristiques</div>
+      <h2 class="section-title">Tout ce qu’il faut pour un séjour parfait</h2>
+      <p class="section-subtitle">
+        Une villa pensée pour être aussi agréable à vivre qu’à regarder.
+      </p>
     </div>
 
-    <div class="faq-item">
-      <button class="faq-question">
-        La piscine est-elle privée ou partagée?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        Elle est privée!
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-label">
+          <div class="feature-icon">🛏️</div>
+          3 chambres climatisées
+        </div>
+        <div class="feature-note">
+          Chaque chambre est équipée d’un lit king, de rangement et de l’air climatisé.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-label">
+          <div class="feature-icon">🛁</div>
+          2.5 salles de bain
+        </div>
+        <div class="feature-note">
+          Deux salles de bain complètes et une salle d’eau pour plus de confort.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-label">
+          <div class="feature-icon">🏊</div>
+          Piscine privée
+        </div>
+        <div class="feature-note">
+          Une piscine juste pour vous, entourée de verdure, parfaite pour se rafraîchir après la plage.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-label">
+          <div class="feature-icon">🍳</div>
+          Cuisine complète + mini‑cuisine extérieure
+        </div>
+        <div class="feature-note">
+          Tout ce qu’il faut pour cuisiner sur place, à l’intérieur comme à l’extérieur.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-label">
+          <div class="feature-icon">🔥</div>
+          BBQ extérieur
+        </div>
+        <div class="feature-note">
+          Pour des soirées grillades au bord de la piscine.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-label">
+          <div class="feature-icon">🧺</div>
+          Laveuse
+        </div>
+        <div class="feature-note">
+          Pratique pour les séjours plus longs ou en famille.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-label">
+          <div class="feature-icon">⚡</div>
+          Wi‑Fi haute vitesse
+        </div>
+        <div class="feature-note">
+          Adapté au télétravail, aux appels vidéo et au streaming.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-label">
+          <div class="feature-icon">🌴</div>
+          Quartier calme et sécurisé
+        </div>
+        <div class="feature-note">
+          Un environnement paisible, tout en restant proche de l’action de Cabarete.
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="faq-item">
-      <button class="faq-question">
-        Quels sont les tarifs?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        Prix à la semaine en dollars canadiens. Rabais pour les séjours de longue durée (contactez-nous).<br><br>
-        <strong>1er avril au 31 août :</strong> 1200$<br>
-        <strong>1er septembre au 30 novembre :</strong> 900$<br>
-        <strong>1er décembre au 17 décembre :</strong> 1500$<br>
-        <strong>18 décembre au 3 janvier :</strong> 2100$<br>
-        <strong>4 janvier au 31 mars :</strong> 1500$
-      </div>
+  <!-- GALERIE -->
+  <section class="section" id="galerie">
+    <div class="section-header">
+      <div class="section-kicker">Galerie</div>
+      <h2 class="section-title">Découvrir Villa Estela en images</h2>
+      <p class="section-subtitle">
+        Une sélection de photos officielles de la villa, de la piscine et des espaces de vie.
+      </p>
     </div>
 
-    <div class="faq-item">
-      <button class="faq-question">
-        Comment réserver?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        Contactez-nous par courriel : <strong>villa.estela.cabarete@gmail.com</strong><br>
-        ou via Facebook (voir le lien plus bas).
+    <div class="gallery-wrapper">
+      <div class="gallery-grid" id="gallery">
+        <img src="villa/1.jpg" alt="Villa Estela - Vue extérieure">
+        <img src="villa/2.jpg" alt="Villa Estela - Piscine privée">
+        <img src="villa/3.jpg" alt="Villa Estela - Salon">
+        <img src="villa/4.jpg" alt="Villa Estela - Cuisine">
+        <img src="villa/5.jpg" alt="Villa Estela - Chambre">
+        <img src="villa/6.jpg" alt="Villa Estela - Salle de bain">
+        <img src="villa/7.jpg" alt="Villa Estela - Terrasse">
+        <img src="villa/8.jpg" alt="Villa Estela - Espace extérieur">
+        <img src="villa/9.jpg" alt="Villa Estela - Détails">
+        <img src="villa/10.jpg" alt="Villa Estela - Ambiance">
+        <img src="villa/11.jpg" alt="Villa Estela - Espace de vie">
+        <img src="villa/12.jpg" alt="Villa Estela - Piscine de nuit">
+        <img src="villa/13.jpg" alt="Villa Estela - Vue générale">
       </div>
     </div>
+  </section>
 
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightbox-close">&times;</span>
+    <span class="lightbox-nav lightbox-prev" id="lightbox-prev">&#10094;</span>
+    <img class="lightbox-img" id="lightbox-img" alt="">
+    <span class="lightbox-nav lightbox-next" id="lightbox-next">&#10095;</span>
   </div>
-</section>
 
+  <!-- CALENDRIER -->
+  <section class="section" id="calendrier">
+    <div class="section-header">
+      <div class="section-kicker">Disponibilités</div>
+      <h2 class="section-title">Consulter le calendrier</h2>
+      <p class="section-subtitle">
+        Vérifiez les dates disponibles pour Villa Estela.  
+        <strong>Note :</strong> certaines dates non disponibles peuvent ne pas s’afficher correctement avec Safari ou Firefox.
+      </p>
+    </div>
+
+    <div style="display:flex; justify-content:center; margin-top:1rem;">
+      <iframe
+        src="https://calendar.google.com/calendar/embed?src=villa.estela.cabarete%40gmail.com&ctz=America%2FToronto"
+        class="calendar-frame"
+        frameborder="0"
+        scrolling="no">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="section-header">
+      <div class="section-kicker">Contact</div>
+      <h2 class="section-title">Parler de votre séjour à Villa Estela</h2>
+      <p class="section-subtitle">
+        Indiquez vos dates, le nombre de personnes et vos besoins. Nous vous répondrons rapidement.
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <p>
+        Pour toute demande de réservation ou d’information, écrivez‑nous à :
+      </p>
+      <p>
+        Email :
+        <a href="mailto:villa.estela.cabarete@gmail.com" class="contact-email">
+          villa.estela.cabarete@gmail.com
+        </a>
+      </p>
+      <p style="margin-top:0.8rem;">
+        Vous pouvez également nous écrire via notre page Facebook.
+      </p>
+      <p style="margin-top:0.4rem;">
+        Plus vous nous donnez de détails (dates, nombre d’adultes/enfants, besoins particuliers),
+        plus nous pouvons vous répondre précisément.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="section-header">
+      <div class="section-kicker">FAQ</div>
+      <h2 class="section-title">Questions fréquentes</h2>
+      <p class="section-subtitle">
+        Quelques réponses aux questions les plus souvent posées avant de réserver.
+      </p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">
+          Où est située Villa Estela ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Villa Estela est située à Kite Beach, Cabarete, à moins de 5 minutes à pied de la plage
+          et à environ 20 minutes de l’aéroport de Puerto Plata (POP).
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Combien de personnes peuvent séjourner à Villa Estela ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          La villa compte 3 chambres avec chacune un lit king. Il y a aussi un sofa lit dans le salon.
+          L’occupation maximale est de 8 personnes, avec un maximum de 6 adultes.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          La piscine est‑elle privée ou partagée ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          La piscine est entièrement privée et réservée aux occupants de la villa.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Quels sont les tarifs ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Prix à la semaine en dollars canadiens. Rabais pour les séjours de longue durée (contactez‑nous).<br><br>
+          <strong>1er avril au 31 août :</strong> 1200&nbsp;$<br>
+          <strong>1er septembre au 30 novembre :</strong> 900&nbsp;$<br>
+          <strong>1er décembre au 17 décembre :</strong> 1500&nbsp;$<br>
+          <strong>18 décembre au 3 janvier :</strong> 2100&nbsp;$<br>
+          <strong>4 janvier au 31 mars :</strong> 1500&nbsp;$
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Comment réserver ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Contactez‑nous par courriel à <strong>villa.estela.cabarete@gmail.com</strong><br>
+          ou via notre page Facebook (lien en bas de page).
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
 <footer>
-  © <span id="year"></span> Villa Estela – Cabarete, République dominicaine.
+  <div class="footer-inner">
+    <div class="footer-left">
+      © <span id="year"></span> Villa Estela – Cabarete, République dominicaine.
+    </div>
 
-  <br><br>
+    <div class="footer-right">
+      <a href="https://www.facebook.com/EstelaCabarete" target="_blank" style="display:inline-flex; align-items:center; gap:0.6rem;">
+        <div class="footer-fb-icon">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               width="18" height="18" viewBox="0 0 24 24" fill="#ffffff">
+            <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 
+            23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.414c0-3.1 
+            1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 
+            0-1.796.715-1.796 1.763v2.316h3.587l-.467 3.696h-3.12V24h6.116C23.403 
+            24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
+          </svg>
+        </div>
+        <span>Suivez‑nous sur Facebook</span>
+      </a>
+    </div>
+  </div>
+</footer>
 
-  <a href="https://www.facebook.com/EstelaCabarete"
-     target="_blank"
-     style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
+<!-- SCRIPTS -->
+<script>
+  // Année dans le footer
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-    <div style="
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #1877f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    ">
-      <svg xmlns="http://www.w3.org/2000/svg"
-           width="22" height="22" viewBox="0 0 24 24" fill="#ffffff">
-        <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 
-        23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.414c0-3.1 
-        1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 
-        0-1.796.
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // HERO slider
+  const slides = document.querySelectorAll('.hero-slide');
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+  }
+
+  setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }, 7000);
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.parentElement;
+      item.classList.toggle('active');
+    });
+  });
+
+  // Lightbox
+  const galleryImages = document.querySelectorAll('#gallery img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+  let currentIndex = 0;
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lightboxImg.src = galleryImages[index].src;
+    lightbox.classList.add('open');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentIndex].src;
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentIndex].src;
+  }
+
+  galleryImages.forEach((img, index) => {
+    img.addEventListener('click', () => openLightbox(index));
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', showPrev);
+  lightboxNext.addEventListener('click', showNext);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+</script>
+
+</body>
+</html>
